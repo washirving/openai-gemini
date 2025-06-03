@@ -436,6 +436,7 @@ const transformMessages = async (messages) => {
       case "user":
         break;
       default:
+        console.log("item.role:", item.role);
         throw new HttpError(`Unknown message role: "${item.role}"`, 400);
     }
     contents.push({
