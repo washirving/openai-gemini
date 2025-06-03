@@ -431,7 +431,7 @@ const transformMessages = async (messages) => {
         transformFnResponse(item, parts);
         continue;
       case "assistant":
-        item.role = "model";
+        item.role = "assistant";
         break;
       case "user":
         break;
