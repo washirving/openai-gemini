@@ -440,7 +440,7 @@ const transformMessages = async (messages) => {
         throw new HttpError(`Unknown message role: "${item.role}"`, 400);
     }
     contents.push({
-      role: item.role,
+      role: "user",
       parts: item.tool_calls ? transformFnCalls(item) : await transformMsg(item)
     });
   }
