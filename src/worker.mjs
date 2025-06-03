@@ -410,11 +410,12 @@ const transformMsg = async ({ content }) => {
 };
 
 const transformMessages = async (messages) => {
+  console.log("messages.length:", messages.length);
   if (!messages) { return; }
   const contents = [];
   let system_instruction;
-for (const item of messages) {
-  console.log("item:", item); // <--- ДОБАВИТЬ ЭТУ СТРОКУ
+  for (const item of messages) {
+    console.log("item:", item);
     console.log("item.role:", item.role);
     switch (item.role) {
       case "system":
