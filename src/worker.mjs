@@ -1,4 +1,3 @@
-
 import { Buffer } from "node:buffer";
 
 export default {
@@ -410,13 +409,10 @@ const transformMsg = async ({ content }) => {
 };
 
 const transformMessages = async (messages) => {
-  console.log("messages.length:", messages.length);
   if (!messages) { return; }
   const contents = [];
   let system_instruction;
   for (const item of messages) {
-    console.log("item:", item);
-    console.log("item.role:", item.role);
     switch (item.role) {
       case "system":
         system_instruction = { parts: await transformMsg(item) };
@@ -435,16 +431,15 @@ const transformMessages = async (messages) => {
         transformFnResponse(item, parts);
         continue;
       case "assistant":
-        item.role = "assistant";
+        item.role = "model";
         break;
       case "user":
         break;
       default:
-        console.log("item.role:", item.role);
         throw new HttpError(`Unknown message role: "${item.role}"`, 400);
     }
     contents.push({
-      role: "user",
+      role: item.role,
       parts: item.tool_calls ? transformFnCalls(item) : await transformMsg(item)
     });
   }
